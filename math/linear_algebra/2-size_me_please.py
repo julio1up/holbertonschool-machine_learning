@@ -3,7 +3,7 @@
 
 
 def matrix_shape(matrix):
-    '''exp'''
+    '''Comment for matrix shape function'''
     result = []
     while (type(matrix) is list):
         result.append(len(matrix))
