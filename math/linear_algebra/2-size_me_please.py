@@ -3,12 +3,12 @@
 
 
 def matrix_shape(matrix):
-        '''exp'''
-        result = []
-        while (type(matrix) is list):
-            result.append(len(matrix))
-            matrix = matrix[0]
-        return result
+    '''exp'''
+    result = []
+    while (type(matrix) is list):
+        result.append(len(matrix))
+        matrix = matrix[0]
+    return result
     
 
 mat1 = [[1, 2], [3, 4]]
