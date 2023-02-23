@@ -4,12 +4,13 @@
 
 def matrix_transpose(matrix):
     '''Transpose Function'''
-    result=[]
-    current_array=[]
-    for j in range(0,len(matrix[0])):
-        current_array=[[i[j] for i in matrix]]
-        result= result+current_array
-        return result
+    result = []
+    current_array = []
+    for j in range(0, len(matrix[0])):
+        current_array = [[i[j] for i in matrix]]
+        result = result+current_array
+    return result
+
 
 mat1 = [[1, 2], [3, 4]]
 matrix_transpose(mat1)
