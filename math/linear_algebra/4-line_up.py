@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 '''Line Up Function'''
 
+
 def add_arrays(vec1, vec2):
     '''Line Up Function'''
     result = []
