@@ -5,9 +5,8 @@ def matrix_shape(matrix):
         while (type(matrix) is list):
             result.append(len(matrix))
             matrix = matrix[0]
-
-            
-            return result
+        return result
+    
 
 mat1 = [[1, 2], [3, 4]]
 print(matrix_shape(mat1))
