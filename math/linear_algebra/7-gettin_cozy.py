@@ -16,10 +16,3 @@ def cat_matrices2D(mat1, mat2, axis=0):
     else:
         return None
     return new_matrix
-
-
-mat1 = [[1, 2], [3, 4]]
-mat2 = [[5, 6]]
-mat3 = [[7], [8]]
-mat4 = cat_matrices2D(mat1, mat2)
-mat5 = cat_matrices2D(mat1, mat3, axis=1)
