@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
+'''Size me up function'''
 
 def matrix_shape(matrix):
+        '''exp'''
         result = []
         while (type(matrix) is list):
             result.append(len(matrix))
