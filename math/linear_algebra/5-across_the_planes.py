@@ -2,7 +2,7 @@
 '''Across The Planes Function'''
 
 
-def add_matrices2D(mat1,mat2):
+def add_matrices2D(mat1, mat2):
     '''Across The Planes Function'''
     rows1 = len(mat1)
     rows2 = len(mat2)
@@ -10,9 +10,9 @@ def add_matrices2D(mat1,mat2):
     columns2 = len(mat2[0])
     if rows1 != rows2 or columns1 != columns2:
         return None
-    result=[]
+    result = []
     for i in range(len(mat1)):
-        sum_row=[]
+        sum_row = []
         for j in range(0, len(mat1[0])):
             sum_row.append(mat1[i][j]+mat2[i][j])
         result.append(sum_row)
