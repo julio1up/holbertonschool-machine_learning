@@ -4,4 +4,4 @@
 
 def np_shape(matrix):
         '''I'll Use My Scale Function '''
-            return matrix.shape
+        return matrix.shape
