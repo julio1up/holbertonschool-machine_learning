@@ -3,5 +3,5 @@
 
 
 def np_shape(matrix):
-        '''I'll Use My Scale Function '''
-        return matrix.shape
+    '''I'll Use My Scale Function '''
+    return matrix.shape
