@@ -2,7 +2,7 @@
 '''Bracing Elements Function'''
 
 
-import numpy as np
+np
 def np_elementwise(mat1, mat2):
     '''Bracing Elements Function'''
     add = np.add(mat1, mat2)
