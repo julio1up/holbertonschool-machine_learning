@@ -3,14 +3,13 @@
 
 
 def poly_derivative(poly):
-    '''Return a new list of coefficients representing the derivative of the polynomial'''
-
+    '''Return a new list of coefficients representing the derivative'''
 
     if type(poly) is not list or poly == []:
         return None
     elif len(poly) < 2:
         return [0]
-    else :
+    else:
         derivative = poly.copy()
         exponent = 1
         derivative.pop(0)
