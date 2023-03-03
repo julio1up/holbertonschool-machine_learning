@@ -3,7 +3,7 @@
 
 
 def poly_derivative(poly):
-      '''Return a new list of coefficients representing the derivative of the polynomial'''
+    '''Return a new list of coefficients representing the derivative of the polynomial'''
 
 
     if type(poly) is not list or poly == []:
