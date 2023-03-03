@@ -9,7 +9,6 @@ def summation_i_squared(n):
     Returns the result of the sum for some n
     """
 
-
     if (type(n) is not int) or (n is None) or (n < 1):
         return None
     else:
