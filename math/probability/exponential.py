@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Exponential class for distribution"""
 
+
 class Exponential:
     """Exponential class for distribution"""
     e = 2.7182818285
