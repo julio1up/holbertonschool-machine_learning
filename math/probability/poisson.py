@@ -7,7 +7,7 @@ class Poisson:
     Poisson class for distribution
     """
 
-    def __init__(self,data=None,lambtha=1.):
+    def __init__(self, data=None, lambtha=1.):
         self.lambtha = float(lambtha)
         if self.lambtha <= 0:
             raise ValueError("lambtha must be a positive value")
@@ -17,7 +17,6 @@ class Poisson:
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
             self.lambtha = float(sum(data)) / len(data)
-
 
     def pmf(self, k):
         """
@@ -33,9 +32,8 @@ class Poisson:
         factiorial = 1
         for i in range(k):
             factorial *= (i + 1)
-        pmf = ((lambtha ** k) * (e** -lambtha)) / factorial
+        pmf = ((lambtha ** k) * (e** - lambtha)) / factorial
         return pmf
-
 
     def cdf(self, k):
         """
