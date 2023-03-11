@@ -29,7 +29,7 @@ class Poisson:
             return 0
         e = 2.7182818285
         lambtha = self.lambtha
-        factiorial = 1
+        factorial = 1
         for i in range(k):
             factorial *= (i + 1)
         pmf = ((lambtha ** k) * (e ** - lambtha)) / factorial
