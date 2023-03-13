@@ -11,7 +11,7 @@ class Normal:
         self.mean = float(mean)
         self.stddev = float(stddev)
         if self.stddev <= 0:
-            raise ValueError("stdddev must be a positive value")
+            raise ValueError("stddev must be a positive value")
         if data is not None:
             if type(data) is not list:
                 raise TypeError("data must be a list")
@@ -32,6 +32,7 @@ class Normal:
         x-score of a given z-score
         """
         return z * self.stddev + self.mean
+
     def pdf(self, x):
         """
         Probability Density Function for normal
