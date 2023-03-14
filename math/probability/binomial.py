@@ -23,7 +23,7 @@ class Binomial:
             self.p = 1 - ((var) / mean)
             self.n = int(round(mean / self.p))
             self.p = mean / self.n
- 
+
     def pmf(self, k):
         """Probability Mass Function for binomial"""
         if type(k) is not int:
