@@ -25,35 +25,33 @@ class Binomial:
             self.p = mean / self.n
     
     def pmf(self, k):
-        """
-    	Probability Mass Function for binomial
-    	"""
-    	if type(k) is not int:
-      	    k = int(k)
-    	if k < 0:
-      	    return 0
-    	n_factorial = 1
-    	for i in range(1, self.n + 1):
+        """Probability Mass Function for binomial"""
+        if type(k) is not int:
+            k = int(k)
+        if k < 0:
+            return 0
+        n_factorial = 1
+        for i in range(1, self.n + 1):
             n_factorial *= i
-    	x_factorial = 1
-    	for i in range(1, k + 1):
+        x_factorial = 1
+        for i in range(1, k + 1):
             x_factorial *= i
-    	op_factorial = 1
-    	for i in range(1, (self.n - k) + 1):
-      	    op_factorial *= i
-    	combinatory = (n_factorial) / (x_factorial * op_factorial)
-    	pmf = combinatory * (self.p ** k) * ((1 - self.p) ** (self.n - k))
-    	return pmf    
+        op_factorial = 1
+        for i in range(1, (self.n - k) + 1):
+            op_factorial *= i
+        combinatory = (n_factorial) / (x_factorial * op_factorial)
+        pmf = combinatory * (self.p ** k) * ((1 - self.p) ** (self.n - k))
+        return pmf    
 
     def cdf(self, k):
-    	"""
-    	Cumulative Distribution Function for binomial
-   	"""
-    	if type(k) is not int:
-      	    k = int(k)
-    	if k < 0:
-      	    return 0
-    	cdf = 0
-    	for i in range(k + 1):
+        """
+        Cumulative Distribution Function for binomial
+        """
+        if type(k) is not int:
+            k = int(k)
+        if k < 0:
+            return 0
+        cdf = 0
+        for i in range(k + 1):
             cdf += Binomial.pmf(self, i)
-    	return cdf
+        return cdf
