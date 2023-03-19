@@ -17,13 +17,13 @@ def convolve_grayscale_same(images, kernel):
         padding_height = kh // 2
         padding_width = kw // 2
 
-    p_images = np.pad(images, ((0, 0), (padding_height, padding_height), (padding_width, padding_width)))
+    p_images = np.pad(images, ((0, 0), (padding_height, padding_height),\n (padding_width, padding_width)))
 
     convoluted = np.zeros((m, height, width))
 
     for h in range(height):
         for w in range(width):
             output = p_images[:, h: h + kh, w: w + kw] * kernel
-            sum_out = np.sum(output, axis = (1, 2))
+            sum_out = np.sum(output, axis=(1, 2))
             convoluted[:, h, w] = sum_out
     return convoluted
