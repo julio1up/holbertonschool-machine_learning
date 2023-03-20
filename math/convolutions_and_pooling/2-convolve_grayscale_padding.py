@@ -21,6 +21,6 @@ def convolve_grayscale_padding(images, kernel, padding):
     for h in range(ch):
         for w in range(cw):
             output = np.sum(p_images[:, h: h + kh, w: w + kw] * kernel, 
-                      axis=1).sum(axis=1)
+                            axis=1).sum(axis=1)
             convoluted[:, h, w] = output
     return convoluted
