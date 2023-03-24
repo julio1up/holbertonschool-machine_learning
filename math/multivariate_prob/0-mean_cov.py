@@ -18,4 +18,3 @@ def mean_cov(X):
         cov += np.outer((X[i] - mean), (X[i] - mean))
     cov /= n - 1
     return mean.reshape(1, d), cov
-
