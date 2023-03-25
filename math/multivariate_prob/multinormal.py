@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Initialize Multinormal"""
 
+import numpy as np
+
 
 class MultiNormal:
     """
