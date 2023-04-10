@@ -1,3 +1,10 @@
+#!/usr/bin/env python3
+"""
+Module to create a neuron
+"""
+import numpy as np
+
+
 class Neuron:
     """
     class that represents a single neuron performing binary classification
