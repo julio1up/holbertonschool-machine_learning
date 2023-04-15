@@ -36,7 +36,7 @@ class NeuralNetwork:
         self.b2 = 0
         self.A2 = 0
 
-        @property
+    @property
     def W1(self):
         return (self.__W1)
 
