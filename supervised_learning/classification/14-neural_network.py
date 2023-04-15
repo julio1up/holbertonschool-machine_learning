@@ -132,3 +132,22 @@ class NeuralNetwork:
 
         self.__W1 = self.W1 - (alpha * d__W1)
         self.__b1 = self.b1 - (alpha * d__b1)
+
+    def train(self, X, Y, iterations=5000, alpha=0.05):
+        """
+        trains the neuron and updates __W1, __b1, __A1, __W2, __b2, and __A2
+        """
+        if type(iterations) is not int:
+            raise TypeError("iterations must be an integer")
+        if iterations <= 0:
+            raise ValueError("iterations must be a positive integer")
+        if type(alpha) is not float:
+            raise TypeError("alpha must be a float")
+        if alpha <= 0:
+            raise ValueError("alpha must be positive")
+
+        for itr in range(iterations):
+            A1, A2 = self.forward_prop(X)
+            self.gradient_descent(X, Y, A1, A2, alpha)
+
+        return (self.evaluate(X, Y))
