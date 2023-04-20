@@ -128,3 +128,22 @@ class DeepNeuralNetwork:
 
             self.__weights["b{}".format(index)] = (
                 self.weights["b{}".format(index)] - (alpha * db))
+
+    def train(self, X, Y, iterations=5000, alpha=0.05):
+        """
+        Train a deep neural network
+        """
+   
+        if type(iterations) is not int:
+            raise TypeError("iterations must be an integer")
+        if iterations <= 0:
+            raise ValueError("iterations must be a positive integer")
+        if type(alpha) is not float:
+            raise TypeError("alpha must be a float")
+        if alpha <= 0:
+            raise ValueError("alpha must be positive")
+
+        for itr in range(iterations):
+            A, cache = self.forward_prop(X)
+            self.gradient_descent(Y, cache, alpha)
+        return (self.evaluate(X, Y))
