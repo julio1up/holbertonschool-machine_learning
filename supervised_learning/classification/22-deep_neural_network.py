@@ -133,7 +133,7 @@ class DeepNeuralNetwork:
         """
         Train a deep neural network
         """
-   
+
         if type(iterations) is not int:
             raise TypeError("iterations must be an integer")
         if iterations <= 0:
