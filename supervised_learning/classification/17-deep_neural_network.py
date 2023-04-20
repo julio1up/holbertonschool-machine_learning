@@ -31,6 +31,18 @@ class DeepNeuralNetwork:
                                             np.sqrt(2 / previous))
             previous = layer
 
-        self.L = len(layers)
-        self.cache = {}
-        self.weights = weights
+        self.__L = len(layers)
+        self.__cache = {}
+        self.__weights = weights
+
+    @property
+    def L(self):
+      return self.__L
+
+    @property
+    def cache(self):
+      return self.__cache
+
+    @property
+    def weights(self):
+      return self.__weights
