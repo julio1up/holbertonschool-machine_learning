@@ -80,7 +80,7 @@ class DeepNeuralNetwork:
         A, cache = self.forward_prop(X)
         cost = self.cost(Y, A)
         prediction = np.where(A >= 0.5, 1, 0)
-        return prediction
+        return (prediction, cost)
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         """
@@ -106,7 +106,7 @@ class DeepNeuralNetwork:
 
             W_prev = self.weights["W{}".format(index)]
 
-            self.__weights["W{}".format(index)] = self.__weights["W{}".format(index)] -
-                                                   (alpha * dW)
-            self.__weights["b{}".format(index)] = self.__weights["b{}".format(index)] -
-                                                   (alpha * db)
+            self.__weights["W{}".format(index)] = self.__weights["W{}".format(index)] - (
+                                                   alpha * dW)
+            self.__weights["b{}".format(index)] = self.__weights["b{}".format(index)] - (
+                                                   alpha * db)
