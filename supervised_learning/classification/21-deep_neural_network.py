@@ -83,30 +83,45 @@ class DeepNeuralNetwork:
         return (prediction, cost)
 
     def gradient_descent(self, Y, cache, alpha=0.05):
-        """
-        Gradient descent of a deep neural network
-        """
+
         m = Y.shape[1]
         back = {}
 
         for index in range(self.L, 0, -1):
+
             A = cache["A{}".format(index - 1)]
-            if index  == self.L:
-                back["dz{}".format(index)] = cache["A{}".format(index) - Y]
+
+            # checks if the current layer is the output layer
+            if index == self.L:
+                #derivative of cost with respect to the output activations A
+                # is computed as A - Y
+                back["dz{}".format(index)] = (cache["A{}".format(index)] - Y)
             else:
+                #compute derivative w.r.t the activations of
+                #the previous layer
+                #retrieve derivative w.r.t the activations of
+                #the current layer+1
                 dz_prev = back["dz{}".format(index + 1)]
+                # retrieve the activations of the current layer
                 A_current = cache["A{}".format(index)]
+                #compute derivative of cost with respect to the activations
+                back["dz{}".format(index)] = (
+                    np.matmul(W_prev.transpose(), dz_prev) *
+                    (A_current * (1 - A_current)))
 
-            back["dz{}".format(index)] = (np.matmul(W_prev.transpose(), dz_prev) *
-                                          (A_current * (1 - A_current)))
-
+            # compute the gradients of the weights and biases of
+            #a layer during backpropagation
+            # dz is the error of the current layer
             dz = back["dz{}".format(index)]
-            dW = (1/m) * (np.matmul(dz, A.transpose()))
-            db = (1/m) * (np.sum(dz, axis = 1, keepdim = True))
+            # dW is the gradient of the weights
+            dW = (1 / m) * (np.matmul(dz, A.transpose()))
+            # db is the gradient of the biases, along the m axis
+            db = (1 / m) * np.sum(dz, axis=1, keepdims=True)
 
             W_prev = self.weights["W{}".format(index)]
 
-            self.__weights["W{}".format(index)] = self.__weights["W{}".format(index)] - (
-                                                   alpha * dW)
-            self.__weights["b{}".format(index)] = self.__weights["b{}".format(index)] - (
-                                                   alpha * db)
+            self.__weights["W{}".format(index)] = (
+                self.weights["W{}".format(index)] - (alpha * dW))
+
+            self.__weights["b{}".format(index)] = (
+                self.weights["b{}".format(index)] - (alpha * db))
