@@ -63,3 +63,12 @@ class DeepNeuralNetwork:
             self.__cache["A{}".format(index + 1)] = A
 
         return (A, self.__cache)
+
+    def cost(self, Y, A):
+        """
+        Calculates cost of a deep neural network
+        """
+        m = Y.shape[1]
+        m_loss = np.sum((Y * np.log(A)) + ((1 - Y) * np.log(1.0000001 - A)))
+        cost = (1 / m) * (-(m_loss))
+        return (cost)
