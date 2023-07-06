@@ -97,4 +97,3 @@ class BidirectionalCell():
 
         Y = [self.softmax(np.dot(h, self.Wy) + self.by) for h in H]
         return np.stack(Y)
-
