@@ -1,83 +1,50 @@
 #!/usr/bin/env python3
-"""
-Calculates the probability density function of a Gaussian distribution
-"""
+"""PDF function """
+
 import numpy as np
 
 
 def pdf(X, m, S):
     """
-    Calculates the probability density function of a Gaussian distribution
-    X: numpy.ndarray of shape (n, d) containing the data points whose
-    PDF should be evaluated
-    m: numpy.ndarray of shape (d,) containing the mean of the
-    distribution
-    S: numpy.ndarray of shape (d, d) containing the covariance of the
-    distribution
-    return: P, or None on failure
-        P is a numpy.ndarray of shape (n,) containing the PDF values for each
-        data point
+    Probability Density Function of gaussian distributions
     """
-    if type(X) is not np.ndarray or len(X.shape) != 2:
+
+    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None
-    if type(m) is not np.ndarray or len(m.shape) != 1:
+    if not isinstance(m, np.ndarray) or len(m.shape) != 1:
         return None
-    if type(S) is not np.ndarray or len(S.shape) != 2:
+    if not isinstance(S, np.ndarray) or len(S.shape) != 2:
         return None
     if X.shape[1] != m.shape[0] or X.shape[1] != S.shape[0]:
         return None
     if S.shape[0] != S.shape[1]:
         return None
-    d = S.shape[0]
 
-    det = np.linalg.det(S)
-    inv = np.linalg.inv(S)
-    first = 1 / ((2 * np.pi) ** (d / 2) * np.sqrt(det))
-    second = np.dot((X - m), inv)
-    third = np.sum(second * (X - m) / -2, axis=1)
-    P = first * np.exp(third)
+    # formula
+    # p(x μ,Σ) = (1 (2π)d|Σ|)exp(1/2(xμ)T Σ1(xμ))
+    n, d = X.shape
+    mean = m
+    x_m = X - mean
 
-    P = np.maximum(P, 1e-300)
+    # Determinant of the covariance matrix (d x d)
+    det_S = np.linalg.det(S)
 
-    return P#!/usr/bin/env python3
-"""
-Calculates the probability density function of a Gaussian distribution
-"""
-import numpy as np
+    # Since Σ is Hermitian, it has an eigendecomposition
+    inv_S = np.linalg.inv(S)
 
+    # Formula Section one: (1 (2π)d|Σ|)
+    part_1_dem = np.sqrt(det_S) * ((2 * np.pi) ** (d/2))
 
-def pdf(X, m, S):
-    """
-    Calculates the probability density function of a Gaussian distribution
-    X: numpy.ndarray of shape (n, d) containing the data points whose
-    PDF should be evaluated
-    m: numpy.ndarray of shape (d,) containing the mean of the
-    distribution
-    S: numpy.ndarray of shape (d, d) containing the covariance of the
-    distribution
-    return: P, or None on failure
-        P is a numpy.ndarray of shape (n,) containing the PDF values for each
-        data point
-    """
-    if type(X) is not np.ndarray or len(X.shape) != 2:
-        return None
-    if type(m) is not np.ndarray or len(m.shape) != 1:
-        return None
-    if type(S) is not np.ndarray or len(S.shape) != 2:
-        return None
-    if X.shape[1] != m.shape[0] or X.shape[1] != S.shape[0]:
-        return None
-    if S.shape[0] != S.shape[1]:
-        return None
-    d = S.shape[0]
+    # Formula Section two_upper_1: 1/2(xμ)T
+    part_2 = np.matmul(x_m, inv_S)
 
-    det = np.linalg.det(S)
-    inv = np.linalg.inv(S)
-    first = 1 / ((2 * np.pi) ** (d / 2) * np.sqrt(det))
-    second = np.dot((X - m), inv)
-    third = np.sum(second * (X - m) / -2, axis=1)
-    P = first * np.exp(third)
+    # Formula Section two_upper_2: Σ1(xμ) used diagonal to fix alloc err
+    part_2_1 = np.sum(x_m * part_2, axis=1)
 
-    P = np.maximum(P, 1e-300)
+    # Formula Section two exp(1/2(xμ)T Σ1(xμ))
+    part_2_2 = np.exp(part_2_1 / -2)
 
+    # pdf = part_1 * part_2_2:
+    pdf = part_2_2 / part_1_dem
+    P = np.where(pdf < 1e-300, 1e-300, pdf)
     return P

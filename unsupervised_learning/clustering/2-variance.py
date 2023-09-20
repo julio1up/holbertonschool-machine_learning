@@ -1,59 +1,33 @@
 #!/usr/bin/env python3
-"""
-Calculates the total intra-cluster variance for a data set
-"""
+"""Variance"""
+
 import numpy as np
 
 
 def variance(X, C):
     """
-    Calculates the intra-cluster variance
-    X: numpy.ndarray of shape (n, d) containing the data set
-    C: numpy.ndarray of shape (k, d) containing the centroid means for
-    each cluster
-    return: var, or None on failure
-        var is the total variance
+    Calculate the total intra-cluste variance for a data set
     """
-    if type(X) is not np.ndarray or len(X.shape) != 2:
+    if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None
-    if type(C) is not np.ndarray or len(C.shape) != 2:
-        return None
-    k, d = C.shape
-    if type(k) is not int or k <= 0:
+    if not isinstance(C, np.ndarray) or len(C.shape) != 2:
         return None
     if X.shape[1] != C.shape[1]:
         return None
-    D = np.sqrt(((X - C[:, np.newaxis]) ** 2).sum(axis=2))
-    cluster = np.min(D, axis=0)
 
-    var = np.sum(np.square(cluster))
-    return var#!/usr/bin/env python3
-"""
-Calculates the total intra-cluster variance for a data set
-"""
-import numpy as np
+    n, d = X.shape
 
-
-def variance(X, C):
     """
-    Calculates the intra-cluster variance
-    X: numpy.ndarray of shape (n, d) containing the data set
-    C: numpy.ndarray of shape (k, d) containing the centroid means for
-    each cluster
-    return: var, or None on failure
-        var is the total variance
+    In K-means clustering, the primary objective is to
+    minimize the intra-cluster variance,
+    which represents how much the data points
+    within each cluster differ from their cluster centroid.
     """
-    if type(X) is not np.ndarray or len(X.shape) != 2:
-        return None
-    if type(C) is not np.ndarray or len(C.shape) != 2:
-        return None
-    k, d = C.shape
-    if type(k) is not int or k <= 0:
-        return None
-    if X.shape[1] != C.shape[1]:
-        return None
-    D = np.sqrt(((X - C[:, np.newaxis]) ** 2).sum(axis=2))
-    cluster = np.min(D, axis=0)
+    # distances also know as euclidean distance
+    centroids_extended = C[:, np.newaxis]
+    distances = np.sqrt(((X - centroids_extended) ** 2).sum(axis=2))
+    min_distances = np.min(distances, axis=0)
 
-    var = np.sum(np.square(cluster))
-    return var
+    variance = np.sum(min_distances ** 2)
+
+    return variance
